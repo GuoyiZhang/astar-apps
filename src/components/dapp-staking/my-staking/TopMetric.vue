@@ -103,7 +103,7 @@ import {
   AccountLedger,
   RewardDestination,
   useAccount,
-  useApr,
+  useAprFromApi,
   useAvgBlockTime,
   useNetworkInfo,
 } from 'src/hooks';
@@ -114,12 +114,11 @@ import { DappCombinedInfo } from 'src/v2/models/DappsStaking';
 import { computed, defineComponent, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import PieChart from 'src/components/common/PieChart.vue';
-import SnowPack from 'src/components/common/SnowPack.vue';
 export default defineComponent({
-  components: { PieChart, SnowPack },
+  components: { PieChart },
   setup() {
     const store = useStore();
-    const { stakerApr, stakerApy } = useApr();
+    const { stakerApr, stakerApy } = useAprFromApi();
     const { currentAccount } = useAccount();
     const dappsCount = computed<DappCombinedInfo[]>(
       () => store.getters['dapps/getRegisteredDapps']().length
